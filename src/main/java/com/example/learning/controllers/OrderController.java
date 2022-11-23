@@ -2,6 +2,7 @@ package com.example.learning.controllers;
 
 
 import com.example.learning.model.TacoOrder;
+import com.example.learning.repo.OrderRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
@@ -18,6 +19,10 @@ import javax.validation.Valid;
 @RequestMapping("/orders")
 @SessionAttributes("tacoOrder")
 public class OrderController {
+    private OrderRepository orderRepo;
+    public OrderController(OrderRepository orderRepo) {
+        this.orderRepo = orderRepo;
+    }
     @GetMapping("/current") public String orderForm() {
         return "orderForm";
     }
@@ -28,6 +33,7 @@ public class OrderController {
             return "orderForm";
         }
 
+        orderRepo.save(order);
         log.info("Order submitted: {}", order);
         sessionStatus.setComplete();
 
