@@ -6,5 +6,6 @@ import org.springframework.context.annotation.Configuration; import
 public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("home"); }
+        registry.addViewController("/").setViewName("home");
+    }
 }

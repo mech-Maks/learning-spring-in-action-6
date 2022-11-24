@@ -1,13 +1,13 @@
 package com.example.learning.converters;
 
 import com.example.learning.model.Ingredient;
-import com.example.learning.model.Ingredient.Type;
 import com.example.learning.repo.IngredientRepository;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
-
-import java.util.HashMap;
-import java.util.Map;
+/**
+ * This class convertes fields Form from UI. Strings are converted into Ingredient enums.
+ *
+**/
 
 @Component
 public class IngredientByIdConverter implements Converter<String, Ingredient> {
