@@ -1,4 +1,4 @@
-package com.example.learning.configuration;
+package com.example.learning.configuration.web;
 
 import org.springframework.context.annotation.Configuration; import
         org.springframework.web.servlet.config.annotation.ViewControllerRegistry; import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
