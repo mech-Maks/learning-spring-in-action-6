@@ -1,31 +1,26 @@
 package com.example.learning.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.domain.Persistable;
-import org.springframework.data.relational.core.mapping.Table;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Data
-@Table
-public class Ingredient implements Persistable<String> {
+@Entity
+@NoArgsConstructor
+@AllArgsConstructor
+public class Ingredient {
     @Id
-    private final String id;
+    private String id;
 
-    private final String name;
+    private String name;
 
-    private final Type type;
+    private Type type;
 
     // not in DB fields
     private static boolean initialized = false;
-
-    public static void initialize() {
-        initialized = true;
-    }
-
-    @Override
-    public boolean isNew() {
-        return !initialized;
-    }
 
     public enum Type {
         WRAP, PROTEIN, VEGGIES, CHEESE, SAUCE;

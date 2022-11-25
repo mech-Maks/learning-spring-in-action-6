@@ -33,7 +33,6 @@ public class InitStaticDataInDb {
             repo.save(new Ingredient("JACK", "Monterrey Jack", CHEESE));
             repo.save(new Ingredient("SLSA", "Salsa", SAUCE));
             repo.save(new Ingredient("SRCR", "Sour Cream", SAUCE));
-            Ingredient.initialize();
             System.out.println("SAVED ALL INGREDIENTS");
         };
     }
