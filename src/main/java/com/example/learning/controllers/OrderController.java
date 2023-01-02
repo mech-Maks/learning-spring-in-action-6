@@ -1,7 +1,7 @@
 package com.example.learning.controllers;
 
 
-import com.example.learning.model.TacoOrder;
+import com.example.learning.entity.TacoOrder;
 import com.example.learning.repo.OrderRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;

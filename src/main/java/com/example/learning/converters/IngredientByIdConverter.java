@@ -1,6 +1,6 @@
 package com.example.learning.converters;
 
-import com.example.learning.model.Ingredient;
+import com.example.learning.entity.Ingredient;
 import com.example.learning.repo.IngredientRepository;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;

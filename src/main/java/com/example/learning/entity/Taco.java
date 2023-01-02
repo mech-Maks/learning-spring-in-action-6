@@ -1,4 +1,4 @@
-package com.example.learning.model;
+package com.example.learning.entity;
 
 import lombok.Data;
 

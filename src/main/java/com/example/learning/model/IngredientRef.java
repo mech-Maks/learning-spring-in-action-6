@@ -1,5 +1,6 @@
 package com.example.learning.model;
 
+import com.example.learning.entity.Ingredient;
 import lombok.Data;
 
 import java.util.List;

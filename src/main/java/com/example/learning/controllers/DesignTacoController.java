@@ -1,9 +1,10 @@
 package com.example.learning.controllers;
 
-import com.example.learning.model.Ingredient;
-import com.example.learning.model.Taco;
-import com.example.learning.model.TacoOrder;
+import com.example.learning.entity.Ingredient;
+import com.example.learning.entity.Taco;
+import com.example.learning.entity.TacoOrder;
 import com.example.learning.repo.IngredientRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import javax.validation.Valid;
-import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -23,13 +23,9 @@ import java.util.stream.StreamSupport;
 @Controller
 @RequestMapping("/design")
 @SessionAttributes("tacoOrder")
+@RequiredArgsConstructor
 public class DesignTacoController {
-
     private final IngredientRepository ingredientRepo;
-
-    public DesignTacoController(IngredientRepository ingredientRepo) {
-        this.ingredientRepo = ingredientRepo;
-    }
 
     @ModelAttribute
     public void addIngredientsToModel(Model model) {

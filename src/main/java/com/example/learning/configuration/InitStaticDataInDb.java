@@ -1,16 +1,16 @@
 package com.example.learning.configuration;
 
-import com.example.learning.model.Ingredient;
+import com.example.learning.entity.Ingredient;
 import com.example.learning.repo.IngredientRepository;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import static com.example.learning.model.Ingredient.Type.CHEESE;
-import static com.example.learning.model.Ingredient.Type.PROTEIN;
-import static com.example.learning.model.Ingredient.Type.SAUCE;
-import static com.example.learning.model.Ingredient.Type.VEGGIES;
-import static com.example.learning.model.Ingredient.Type.WRAP;
+import static com.example.learning.entity.Ingredient.Type.CHEESE;
+import static com.example.learning.entity.Ingredient.Type.PROTEIN;
+import static com.example.learning.entity.Ingredient.Type.SAUCE;
+import static com.example.learning.entity.Ingredient.Type.VEGGIES;
+import static com.example.learning.entity.Ingredient.Type.WRAP;
 
 @Configuration
 public class InitStaticDataInDb {

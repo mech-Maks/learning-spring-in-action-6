@@ -1,6 +1,6 @@
 package com.example.learning.repo;
 
-import com.example.learning.model.TacoOrder;
+import com.example.learning.entity.TacoOrder;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
