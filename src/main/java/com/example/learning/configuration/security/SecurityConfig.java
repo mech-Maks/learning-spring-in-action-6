@@ -1,36 +1,47 @@
 package com.example.learning.configuration.security;
 
+import com.example.learning.entity.User;
+import com.example.learning.model.UserDetailsService;
+import com.example.learning.repo.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
+@EnableWebSecurity
+@Slf4j
 public class SecurityConfig {
+    /*
+     * Encrypt password and send it to server (don't decrypt on server-side).
+     * Method matches(...) of class PasswordEncoder is used to compare encrypted passwords.
+     * Bean is fetched by autoconfiguration of spring security component
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    // bean for spring-security to configure rules for url-access
     @Bean
-    public UserDetailsService userDetailsService(PasswordEncoder encoder) {
-        List<UserDetails> usersList = new ArrayList<>(); usersList.add(new User(
-                "buzz", encoder.encode("password"),
-                Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"))));
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        // DO NOT USE IN PROD
+        http.csrf().disable();
+        http.headers().frameOptions().disable();
 
-        usersList.add(new User(
-                "woody", encoder.encode("password"),
-                Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"))));
-
-        return new InMemoryUserDetailsManager(usersList);
+        return http
+                .authorizeRequests()
+                .antMatchers("/design", "/orders").hasRole("USER")
+                .antMatchers("/h2-console/**").permitAll()
+                .antMatchers("/", "/**").permitAll()
+                .and()
+                .formLogin().loginPage("/login")
+                .and()
+                .build();
     }
 }
