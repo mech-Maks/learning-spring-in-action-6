@@ -1,14 +1,11 @@
 package com.example.learning.configuration.security;
 
-import com.example.learning.entity.User;
-import com.example.learning.model.UserDetailsService;
-import com.example.learning.repo.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -16,6 +13,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 @Slf4j
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
     /*
      * Encrypt password and send it to server (don't decrypt on server-side).
@@ -30,7 +28,7 @@ public class SecurityConfig {
     // bean for spring-security to configure rules for url-access
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        // DO NOT USE IN PROD
+        // DO NOT USE IN PROD (for h2-console via url)
         http.csrf().disable();
         http.headers().frameOptions().disable();
 
@@ -41,6 +39,8 @@ public class SecurityConfig {
                 .antMatchers("/", "/**").permitAll()
                 .and()
                 .formLogin().loginPage("/login")
+                .and()
+                .logout()
                 .and()
                 .build();
     }
