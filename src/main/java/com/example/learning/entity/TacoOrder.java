@@ -9,7 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
@@ -20,6 +22,7 @@ import java.util.List;
 
 @Data
 @Entity
+@Table(name = "Taco_Order")
 public class TacoOrder implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -28,6 +31,9 @@ public class TacoOrder implements Serializable {
     private Long id;
 
     private Date placedAt = new Date();
+
+    @ManyToOne
+    private User user;
 
     @Column(name = "delivery_name")
     @NotBlank(message="Delivery name is required")
